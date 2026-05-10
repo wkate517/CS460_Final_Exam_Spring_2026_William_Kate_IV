@@ -1,7 +1,7 @@
 # The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** William Kate IV
+**Student ID:** 827900522
 **Course:** CS 460 – Algorithms | Spring 2026
 
 > This README is your project documentation. Write it the way a developer would document
@@ -17,13 +17,16 @@
 > per question. Each bullet should be 1-2 sentences max.
 
 - **Why a single shortest-path run from S is not enough:**
-  _Your answer here._
+
+- Running a single shortest-path algorithm from S only tells us the cheapest way to reach each node individually, it doesn't tell us the best order to visit all the relics.
 
 - **What decision remains after all inter-location costs are known:**
-  _Your answer here._
+
+- Even if we know the shortest distances between every pair of important nodes, we still have to decide the order in which to visit the relics before going to T.
 
 - **Why this requires a search over orders (one sentence):**
-  _Your answer here._
+
+- This problem is really about trying different orders of visiting relics since the total cost changes depending on the order, so it is not just one shortest path calculation.
 
 ---
 
@@ -35,8 +38,8 @@
 
 | Source Node Type | Why it is a source |
 |---|---|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+| Start node (S) | Need to compute the shortest paths from the start node, then to all relics, and then to T.|
+| Relic nodes (M) | Need to compute the shortest paths between each relic and then ultimately to T. |
 
 ### Part 2b: Distance Storage
 
@@ -44,20 +47,20 @@
 
 | Property | Your answer |
 |---|---|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Data structure name | Dictionary (hash map) |
+| What the keys represent | Pair of nodes (u, v) where u and v are important nodes |
+| What the values represent | Shortest distance of path from node u to node v |
+| Lookup time complexity | O(1)|
+| Why O(1) lookup is possible | A dictionary uses hashing to access values by key directly |
 
 ### Part 2c: Precomputation Complexity
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** _your answer_
-- **Cost per run:** _your answer_
-- **Total complexity:** _your answer_
-- **Justification (one line):** _your answer_
+- **Number of Dijkstra runs:** k + 2
+- **Cost per run:** O(m log n)
+- **Total complexity:** O((k + 2) m log n)
+- **Justification (one line):** Dijkstra's is run once from S, then again once from T, and then once from each of the k relic nodes.
 
 ---
 

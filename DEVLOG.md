@@ -1,7 +1,7 @@
 # Development Log – The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** William Kate IV
+**Student ID:** 827900522
 
 > Instructions: Write at least four dated entries. Required entry types are marked below.
 > Two to five sentences per entry is sufficient. Write entries as you go, not all in one
@@ -10,12 +10,12 @@
 
 ---
 
-## Entry 1 – [Date]: Initial Plan
+## Entry 1 – [May 9th, 2026]: Initial Plan
 
 > Required. Write this before writing any code. Describe your plan: what you will
 > implement first, what parts you expect to be difficult, and how you plan to test.
 
-_Your entry here._
+I plan to start by implementing Dijkstra's algorithm first since I need to figure out the shortest paths between the important nodes. After doing that, I will do a precomputation for the distances betweeen S, all of the relics nodes, and T so that I can have something that is a smaller graph. I think the main challenge I will face will be figuring out the best order to visit all the relics since there are many different path combinations to try. Specifically, the search part that involves pruning and backtracking will most likely be the hardest thing for me to figure out and implement. To test everything, I will start with smaller graphs where I can confirm the optimal path manually and then from there expand and try more difficult cases until everything works.
 
 ---
 
@@ -49,8 +49,8 @@ _Your entry here._
 
 | Part | Estimated Hours |
 |---|---|
-| Part 1: Problem Analysis | |
-| Part 2: Precomputation Design | |
+| Part 1: Problem Analysis | 30 minutes |
+| Part 2: Precomputation Design | 1.5 hours |
 | Part 3: Algorithm Correctness | |
 | Part 4: Search Design | |
 | Part 5: State and Search Space | |
