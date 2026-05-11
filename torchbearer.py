@@ -145,10 +145,13 @@ def dijkstra_invariant_check():
     str
         Your Part 3 README answers, written as a string.
         Must match what you wrote in README Part 3.
-
-    TODO
     """
-    return "TODO"
+    return """- For nodes already finalized (in S): Once a node has been finalized, it's associated distance value is set because Dijkstra's algorithm has already found the cheapest possible path to it.
+- For nodes not yet finalized (not in S): These nodes that have not yet been finalized still have their temporary distance estimates based on the best possible paths that have been discovered so far, and the estimates may improve as more edges are explored.
+- Initialization: Initially, only the source node has a distance that is 0 and all the other nodes are set to infinity, so the invariant holds because no paths that are incorrect have been considered yet.
+- Maintenance: When picking the node with the smallest distance it must be correct because all the edge weights are nonnegative, so there is no way a shorter path to it can be found later on.
+- Termination: When the algorithm terminates, all the nodes are finalized, so the invariant guarantees that every distance value is the true shortest path from the source.
+- Having accurate shortest-path distances ensures that the route planner selects the most efficient path for reaching all the relics and then eventually reaching the exit."""
 
 
 # =============================================================================

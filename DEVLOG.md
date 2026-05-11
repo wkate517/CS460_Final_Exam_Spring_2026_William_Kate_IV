@@ -19,16 +19,16 @@ I plan to start by implementing Dijkstra's algorithm first since I need to figur
 
 ---
 
-## Entry 2 – [Date]: [Short description]
+## Entry 2 – [May 11th, 2026]: [Understanding Dijkstra Correctness and Design]
 
-> Required. At least one entry must describe a bug, wrong assumption, or design change
-> you encountered. Describe what went wrong and how you resolved it.
-
-_Your entry here._
+Today I workd on Part 3 and focused on understanding why Dijkstra's algorithm produces correct shortest-path distances, especially the invariant involving finalized and non-finalized nodes. I worked through how the algorithm maintains correctness at each step and why nonnegative edge weights are important for ensuring the minimum-distance node is always safe to finalize. I also spent time organizing the precomputation design and making sure I understood how the distance table will be user later on in the search. This was able to help me clairfy how all the parts fit together before moving on to implementing the next section.
 
 ---
 
 ## Entry 3 – [Date]: [Short description]
+
+> Required. At least one entry must describe a bug, wrong assumption, or design change
+> you encountered. Describe what went wrong and how you resolved it.
 
 _Your entry here._
 
@@ -51,7 +51,7 @@ _Your entry here._
 |---|---|
 | Part 1: Problem Analysis | 30 minutes |
 | Part 2: Precomputation Design | 1.5 hours |
-| Part 3: Algorithm Correctness | |
+| Part 3: Algorithm Correctness | 1 hour |
 | Part 4: Search Design | |
 | Part 5: State and Search Space | |
 | Part 6: Pruning | |

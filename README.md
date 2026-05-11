@@ -75,29 +75,29 @@
 > Do not copy the invariant text from the spec.
 
 - **For nodes already finalized (in S):**
-  _Your answer here._
+- Once a node has been finalized, it's associated distance value is set because Dijkstra's algorithm has already found the cheapest possible path to it.
 
 - **For nodes not yet finalized (not in S):**
-  _Your answer here._
+- These nodes that have not yet been finalized still have their temporary distance estimates based on the best possible paths that have been discovered so far, and the estimates may improve as more edges are explored.
 
 ### Part 3b: Why Each Phase Holds
 
 > One to two bullets per phase. Maintenance must mention nonnegative edge weights.
 
 - **Initialization : why the invariant holds before iteration 1:**
-  _Your answer here._
+- Initially, only the source node has a distance that is 0 and all the other nodes are set to infinity, so the invariant holds because no paths that are incorrect have been considered yet.
 
 - **Maintenance : why finalizing the min-dist node is always correct:**
-  _Your answer here._
+- When picking the node with the smallest distance it must be correct because all the edge weights are nonnegative, so there is no way a shorter path to it can be found later on.
 
 - **Termination : what the invariant guarantees when the algorithm ends:**
-  _Your answer here._
+- When the algorithm terminates, all the nodes are finalized, so the invariant guarantees that every distance value is the true shortest path from the source.
 
 ### Part 3c: Why This Matters for the Route Planner
 
 > One sentence connecting correct distances to correct routing decisions.
 
-_Your answer here._
+- Having accurate shortest-path distances ensures that the route planner selects the most efficient path for reaching all the relics and then eventually reaching the exit.
 
 ---
 
