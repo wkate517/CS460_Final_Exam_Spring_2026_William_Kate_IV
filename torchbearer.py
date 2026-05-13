@@ -166,9 +166,13 @@ def explain_search():
         Your Part 4 README answers, written as a string.
         Must match what you wrote in README Part 4.
 
-    TODO
     """
-    return "TODO"
+    return """- The failure mode: A greedy approach always picks the nearest next relic, but that choice can lead to a total path that is worse because it doesn't consider the future costs.
+- Counter-example setup: Assume that from S distances are: S to B = 1, S to C = 2, and S to D = 2, however traveling between relics is uneven (ex: B to C is very expensive but C to B is cheap).
+- What greedy picks: Greedy would pick relic B first because it has the smallest distance from S.
+- What optimal picks: Optimal would pick either relic C or D to avoid the expensive path that comes after choosing B.
+- Why greedy loses: By choosing B first the next step would be very costly, even though it was optimal at the time, it leads to a higher total cost than choosing a different order of relics.
+- The algorithm must explore different orderings of visiting relics because the overall total cost is dependent on the order in which they are visited."""
 
 
 # =============================================================================
@@ -192,10 +196,23 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
     tuple[float, list[node]]
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
-
-    TODO
     """
-    pass
+    best = [float('inf'), []]
+
+    relics_remaining = set(relics)
+    relics_visited_order = []
+
+    _explore(
+        dist_table,
+        spawn,
+        relics_remaining,
+        relics_visited_order,
+        0,
+        exit_node,
+        best
+    )
+
+    return (best[0], best[1])
 
 
 def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
@@ -227,9 +244,38 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     explaining why it is safe (cannot skip the optimal solution).
     This comment is graded.
     """
-    pass
+    # base case (all relics visited)
+    if not relics_remaining:
+        total_cost = cost_so_far + dist_table[current_loc][exit_node]
+
+        if total_cost < best[0]:
+            best[0] = total_cost
+            best[1] = relics_visited_order.copy()
+
+        return
 
 
+    # recursive case (try each remaining relic)
+    for r in list(relics_remaining):
+        relics_remaining.remove(r)
+        relics_visited_order.append(r)
+
+        new_cost = cost_so_far + dist_table[current_loc][r]
+
+        _explore(
+        dist_table,
+        r,
+        relics_remaining,
+        relics_visited_order,
+        new_cost,
+        exit_node,
+        best
+        )
+
+        #backtrack
+        relics_remaining.add(r)
+        relics_visited_order.pop()
+        
 # =============================================================================
 # PIPELINE
 # =============================================================================

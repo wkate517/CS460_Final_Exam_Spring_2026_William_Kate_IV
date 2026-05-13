@@ -108,17 +108,17 @@
 > State the failure mode. Then give a concrete counter-example using specific node names
 > or costs (you may use the illustration example from the spec). Three to five bullets.
 
-- **The failure mode:** _Your answer here._
-- **Counter-example setup:** _Your answer here._
-- **What greedy picks:** _Your answer here._
-- **What optimal picks:** _Your answer here._
-- **Why greedy loses:** _Your answer here._
+- **The failure mode:** A greedy approach always picks the nearest next relic, but that choice can lead to a total path that is worse because it doesn't consider the future costs.
+- **Counter-example setup:** Assume that from S distances are: S to B = 1, S to C = 2, and S to D = 2, however traveling between relics is uneven (ex: B to C is very expensive but C to B is cheap).
+- **What greedy picks:** Greedy would pick relic B first because it has the smallest distance from S. 
+- **What optimal picks:** Optimal would pick either relic C or D to avoid the expensive path that comes after choosing B.
+- **Why greedy loses:** By choosing B first the next step would be very costly, even though it was optimal at the time, it leads to a higher total cost than choosing a different order of relics.
 
 ### What the Algorithm Must Explore
 
 > One bullet. Must use the word "order."
 
-- _Your answer here._
+- The algorithm must explore different orderings of visiting relics because the overall total cost is dependent on the order in which they are visited.
 
 ---
 
@@ -131,9 +131,9 @@
 
 | Component | Variable name in code | Data type | Description |
 |---|---|---|---|
-| Current location | | | |
-| Relics already collected | | | |
-| Fuel cost so far | | | |
+| Current location | current_loc | node | The node where the search path is currently located |
+| Relics already collected | relics_visited_order | list[node] | The ordered list of relics that have been visited so far |
+| Fuel cost so far | cost_so_far | float | The total fuel cost that has been accumulated up to the current state |
 
 ### Part 5b: Data Structure for Visited Relics
 
@@ -141,18 +141,18 @@
 
 | Property | Your answer |
 |---|---|
-| Data structure chosen | |
-| Operation: check if relic already collected | Time complexity: |
-| Operation: mark a relic as collected | Time complexity: |
-| Operation: unmark a relic (backtrack) | Time complexity: |
-| Why this structure fits | |
+| Data structure chosen | set |
+| Operation: check if relic already collected | Time complexity: O(1) |
+| Operation: mark a relic as collected | Time complexity: O(1) |
+| Operation: unmark a relic (backtrack) | Time complexity: O(1) |
+| Why this structure fits | This structure fits because it allows us to quickly check if a relic has been collected and efficiently add or remove it during the search |
 
 ### Part 5c: Worst-Case Search Space
 
 > Two bullets.
 
-- **Worst-case number of orders considered:** _Your answer (in terms of k)._
-- **Why:** _One-line justification._
+- **Worst-case number of orders considered:** k!
+- **Why:** In the worst case the algorithm would have to try every possible ordering of k relics to find the optimal route.
 
 ---
 

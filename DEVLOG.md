@@ -25,12 +25,12 @@ Today I workd on Part 3 and focused on understanding why Dijkstra's algorithm pr
 
 ---
 
-## Entry 3 – [Date]: [Short description]
+## Entry 3 – [May 12th, 2026]: [Search Design and Recursive Implementation]
 
 > Required. At least one entry must describe a bug, wrong assumption, or design change
 > you encountered. Describe what went wrong and how you resolved it.
 
-_Your entry here._
+Today I worked on designing the search algorithm and implementing the recursive exploration for finding the optimal route. I focused on understanding why a greedy approach fails and how the algorithm must consider different orders of visiting relics, which led me to implementing a brute-force recursive solution with backtracking. While testing, I ran into a bug where my function was returning a suboptimal path, and I initially thought my distance table was wrong. After debugging, I realized the issue was due to incorrect indentation in my recursive function, which caused the backtracking step to not run properly. Fixing the indentation ensured all possible paths were explored and the correct minimum cost was found.
 
 ---
 
@@ -52,8 +52,8 @@ _Your entry here._
 | Part 1: Problem Analysis | 30 minutes |
 | Part 2: Precomputation Design | 1.5 hours |
 | Part 3: Algorithm Correctness | 1 hour |
-| Part 4: Search Design | |
-| Part 5: State and Search Space | |
+| Part 4: Search Design | 1 hour |
+| Part 5: State and Search Space | 2.5 hours |
 | Part 6: Pruning | |
 | Part 7: Implementation | |
 | README and DEVLOG writing | |
