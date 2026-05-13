@@ -262,6 +262,14 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
 
         new_cost = cost_so_far + dist_table[current_loc][r]
 
+        # pruning : It is safe because all of the remaining travel costs are nonnegative.
+        # If the current path is already doing worse than the best solution, it is safe to stop
+        # exploring.
+        if new_cost >= best[0]:
+            relics_remaining.add(r)
+            relics_visited_order.pop()
+            continue
+
         _explore(
         dist_table,
         r,
@@ -272,7 +280,7 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
         best
         )
 
-        #backtrack
+        # backtrack
         relics_remaining.add(r)
         relics_visited_order.pop()
         
@@ -294,11 +302,23 @@ def solve(graph, spawn, relics, exit_node):
     tuple[float, list[node]]
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
-
-    TODO
     """
-    pass
 
+    sources = select_sources(spawn, relics, exit_node)
+
+    dist_table = precompute_distances(
+        graph,
+        spawn,
+        relics,
+        exit_node,
+    )
+
+    return find_optimal_route(
+        dist_table,
+        spawn,
+        relics,
+        exit_node
+    )
 
 # =============================================================================
 # PROVIDED TESTS (do not modify)

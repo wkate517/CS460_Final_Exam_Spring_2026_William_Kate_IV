@@ -4,17 +4,9 @@
 **Student ID:** 827900522
 **Course:** CS 460 – Algorithms | Spring 2026
 
-> This README is your project documentation. Write it the way a developer would document
-> their design decisions , bullet points, brief justifications, and concrete examples where
-> required. You are not writing an essay. You are explaining what you built and why you built
-> it that way. Delete all blockquotes like this one before submitting.
-
 ---
 
 ## Part 1: Problem Analysis
-
-> Document why this problem is not just a shortest-path problem. Three bullet points, one
-> per question. Each bullet should be 1-2 sentences max.
 
 - **Why a single shortest-path run from S is not enough:**
 
@@ -34,16 +26,12 @@
 
 ### Part 2a: Source Selection
 
-> List the source node types as a bullet list. For each, one-line reason.
-
 | Source Node Type | Why it is a source |
 |---|---|
 | Start node (S) | Need to compute the shortest paths from the start node, then to all relics, and then to T.|
 | Relic nodes (M) | Need to compute the shortest paths between each relic and then ultimately to T. |
 
 ### Part 2b: Distance Storage
-
-> Fill in the table. No prose required.
 
 | Property | Your answer |
 |---|---|
@@ -55,8 +43,6 @@
 
 ### Part 2c: Precomputation Complexity
 
-> State the total complexity and show the arithmetic. Two to three lines max.
-
 - **Number of Dijkstra runs:** k + 2
 - **Cost per run:** O(m log n)
 - **Total complexity:** O((k + 2) m log n)
@@ -66,13 +52,7 @@
 
 ## Part 3: Algorithm Correctness
 
-> Document your understanding of why Dijkstra produces correct distances.
-> Bullet points and short sentences throughout. No paragraphs.
-
 ### Part 3a: What the Invariant Means
-
-> Two bullets: one for finalized nodes, one for non-finalized nodes.
-> Do not copy the invariant text from the spec.
 
 - **For nodes already finalized (in S):**
 - Once a node has been finalized, it's associated distance value is set because Dijkstra's algorithm has already found the cheapest possible path to it.
@@ -81,8 +61,6 @@
 - These nodes that have not yet been finalized still have their temporary distance estimates based on the best possible paths that have been discovered so far, and the estimates may improve as more edges are explored.
 
 ### Part 3b: Why Each Phase Holds
-
-> One to two bullets per phase. Maintenance must mention nonnegative edge weights.
 
 - **Initialization : why the invariant holds before iteration 1:**
 - Initially, only the source node has a distance that is 0 and all the other nodes are set to infinity, so the invariant holds because no paths that are incorrect have been considered yet.
@@ -95,8 +73,6 @@
 
 ### Part 3c: Why This Matters for the Route Planner
 
-> One sentence connecting correct distances to correct routing decisions.
-
 - Having accurate shortest-path distances ensures that the route planner selects the most efficient path for reaching all the relics and then eventually reaching the exit.
 
 ---
@@ -104,9 +80,6 @@
 ## Part 4: Search Design
 
 ### Why Greedy Fails
-
-> State the failure mode. Then give a concrete counter-example using specific node names
-> or costs (you may use the illustration example from the spec). Three to five bullets.
 
 - **The failure mode:** A greedy approach always picks the nearest next relic, but that choice can lead to a total path that is worse because it doesn't consider the future costs.
 - **Counter-example setup:** Assume that from S distances are: S to B = 1, S to C = 2, and S to D = 2, however traveling between relics is uneven (ex: B to C is very expensive but C to B is cheap).
@@ -116,8 +89,6 @@
 
 ### What the Algorithm Must Explore
 
-> One bullet. Must use the word "order."
-
 - The algorithm must explore different orderings of visiting relics because the overall total cost is dependent on the order in which they are visited.
 
 ---
@@ -126,9 +97,6 @@
 
 ### Part 5a: State Representation
 
-> Document the three components of your search state as a table.
-> Variable names here must match exactly what you use in torchbearer.py.
-
 | Component | Variable name in code | Data type | Description |
 |---|---|---|---|
 | Current location | current_loc | node | The node where the search path is currently located |
@@ -136,8 +104,6 @@
 | Fuel cost so far | cost_so_far | float | The total fuel cost that has been accumulated up to the current state |
 
 ### Part 5b: Data Structure for Visited Relics
-
-> Fill in the table.
 
 | Property | Your answer |
 |---|---|
@@ -149,8 +115,6 @@
 
 ### Part 5c: Worst-Case Search Space
 
-> Two bullets.
-
 - **Worst-case number of orders considered:** k!
 - **Why:** In the worst case the algorithm would have to try every possible ordering of k relics to find the optimal route.
 
@@ -160,30 +124,24 @@
 
 ### Part 6a: Best-So-Far Tracking
 
-> Three bullets.
-
-- **What is tracked:** _Your answer here._
-- **When it is used:** _Your answer here._
-- **What it allows the algorithm to skip:** _Your answer here._
+- **What is tracked:** The algorithm keeps track of the current minimum, the best, total fuel cost found so far also with the corresposponding order of visited relics.
+- **When it is used:** It is used during the search before continuing deeper into recurstion so that it can compare the current path's cost to the best known solution.
+- **What it allows the algorithm to skip:** It allows the algorithm to skip exploring any of the paths where the current cost is already greater than or equal to the best cost that has been found so far.
 
 ### Part 6b: Lower Bound Estimation
 
-> Three bullets.
-
-- **What information is available at the current state:** _Your answer here._
-- **What the lower bound accounts for:** _Your answer here._
-- **Why it never overestimates:** _Your answer here._
+- **What information is available at the current state:** The algorithm knows the current location, the relics remaining, the relics that have been visited, and the total cost found so far.
+- **What the lower bound accounts for:** The lower bound accounts for the current cost that has been found so far and an estimate of the minimum cost that is possible to achieve when visiting the remaining relics and then reach the exit.
+- **Why it never overestimates:** It never overestimates because it only uses the shortest-path distances that are found in the precomputed table.
 
 ### Part 6c: Pruning Correctness
 
-> One to two bullets. Explain why pruning is safe.
+- If a path that is being developed already has a cost that is worse than the best solution that has been found so far, then there is no reason to keep exploring because it can't improve the result.
 
-- _Your answer here._
+- Because all of the costs are nonnegative, adding more edges will only increase the total cost.
 
 ---
 
 ## References
 
-> Bullet list. If none beyond lecture notes, write that.
-
-- _Your references here._
+- Lecture Notes
